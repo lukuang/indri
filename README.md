@@ -21,8 +21,7 @@ return scoreOccurrence(occurrences, contextSize);
 It is important to note that in the previous functions, the *contextSize* refers to the document length of the current document which score is computed on. Therefore, *idf* and *avgDocLength* need to be computed by the caller, which is *TermScoreFunctionFactory*. 
 
 
-After implementing the scoring function, you need to import it to the **INDRI_HOME/src/TermScoreFunctionFactory.cpp** and define the string you use in the indri runQuery parameter file to indicate that you are using this new ranking function.
-
+After implementing the scoring function, you need to include it to the **INDRI_HOME/src/TermScoreFunctionFactory.cpp** and define the string you use in the indri runQuery parameter file to indicate that you are using this new ranking function, following the sample code TermScoreFunctionFactory_Sample.cpp
 
 Finally, put the code into the corresponding directory wrt $INDRI_HOME and re-compile indri, the method is then ready to use.
 
