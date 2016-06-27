@@ -99,6 +99,14 @@ indri::query::TermScoreFunction* indri::query::TermScoreFunctionFactory::get( co
       } else {
       return new indri::query::TFIDFTermScoreFunction( idf, avgDocLength, qtf, k1, b, true, k3 );
     }
+  } else if (method == "f2exp") {
+    double s = spec.get( "s", 0.5 );
+    double k = spec.get( "k", 0.35 );
+    double idf = pow( (documentCount + 1.0) / ( documentOccurrences + 0.0001 ), k );
+    double avgDocLength = contextSize / double(documentCount);
+    //cout << "docCount:" << documentCount << " documentOccur:" << documentOccurrences << endl;
+    //cout << "idf:" << idf << " avgDoc:" << avgDocLength << " s:" << s << endl;
+    return new indri::query::F3EXPTermScoreFunction( idf, avgDocLength, s );
   }
 
   // if nothing else worked, we'll use dirichlet with mu=2500
