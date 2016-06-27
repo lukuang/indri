@@ -108,7 +108,7 @@ indri::query::TermScoreFunction* indri::query::TermScoreFunctionFactory::get( co
     double avgDocLength = contextSize / double(documentCount);
     //cout << "docCount:" << documentCount << " documentOccur:" << documentOccurrences << endl;
     //cout << "idf:" << idf << " avgDoc:" << avgDocLength << " s:" << s << endl;
-    return new indri::query::F3EXPTermScoreFunction( idf, avgDocLength, s );
+    return new indri::query::F2EXPTermScoreFunction( idf, avgDocLength, s );
   }
 
   // if nothing else worked, we'll use dirichlet with mu=2500
