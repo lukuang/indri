@@ -22,7 +22,7 @@
 #include "indri/DirichletTermScoreFunction.hpp"
 #include "indri/TwoStageTermScoreFunction.hpp"
 #include "indri/Parameters.hpp"
-#include "indri/PivotedTermScoreFunction.hpp"
+
 
 static void termscorefunctionfactory_parse( indri::api::Parameters& converted, const std::string& spec );
 
@@ -100,13 +100,7 @@ indri::query::TermScoreFunction* indri::query::TermScoreFunctionFactory::get( co
       } else {
       return new indri::query::TFIDFTermScoreFunction( idf, avgDocLength, qtf, k1, b, true, k3 );
     }
-  } else if ( method == "pivoted" ) {
-      double s = spec.get( "s", 0.2 );
-      double idf = log( (documentCount+1.0) / (documentOccurrences) );
-      double avgDocLength = contextSize / double(documentCount);
-  
-      return new indri::query::PivotedTermScoreFunction( s, idf, avgDocLength );
-  }
+  } 
 
 
   // if nothing else worked, we'll use dirichlet with mu=2500

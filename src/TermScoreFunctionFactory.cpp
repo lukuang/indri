@@ -110,6 +110,12 @@ indri::query::TermScoreFunction* indri::query::TermScoreFunctionFactory::get( co
     //cout << "docCount:" << documentCount << " documentOccur:" << documentOccurrences << endl;
     //cout << "idf:" << idf << " avgDoc:" << avgDocLength << " s:" << s << endl;
     return new indri::query::F2EXPTermScoreFunction( idf, avgDocLength, s );
+  } else if ( method == "pivoted" ) {
+      double s = spec.get( "s", 0.2 );
+      double idf = log( (documentCount+1.0) / (documentOccurrences) );
+      double avgDocLength = contextSize / double(documentCount);
+  
+      return new indri::query::PivotedTermScoreFunction( s, idf, avgDocLength );
   }
 
   // if nothing else worked, we'll use dirichlet with mu=2500
