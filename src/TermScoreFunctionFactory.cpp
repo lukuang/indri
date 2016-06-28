@@ -24,7 +24,8 @@
 #include "indri/Parameters.hpp"
 
 #include "indri/F2EXPTermScoreFunction.hpp"
-
+#include "indri/PivotedWithoutIDF.hpp"
+ 
 static void termscorefunctionfactory_parse( indri::api::Parameters& converted, const std::string& spec );
 
 //
