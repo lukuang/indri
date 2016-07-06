@@ -59,12 +59,15 @@ indri::query::TermScoreFunction* indri::query::TermScoreFunctionFactory::get( co
   cerr<< "method used: " << method<<endl;
   if( method == "dirichlet" || method == "d" || method == "dir" ) {
     // dirichlet -- takes parameter "mu"
+    cerr<< "Use dirichilet!" <<endl;
+
     double mu = spec.get( "mu", 2500 );
     double docmu=spec.get("documentMu",-1.0); // default is no doc-level smoothing
     return new indri::query::DirichletTermScoreFunction( mu, collectionFrequency, docmu );
-
   } else if( method == "linear" || method == "jm" || method == "jelinek-mercer" ) {
     // jelinek-mercer -- can take parameters collectionLambda (or just lambda) and documentLambda
+    cerr<< "Use linear!" <<endl;
+    
     double documentLambda = spec.get( "documentLambda", 0.0 );
     double collectionLambda;
     
@@ -76,11 +79,15 @@ indri::query::TermScoreFunction* indri::query::TermScoreFunctionFactory::get( co
     return new indri::query::JelinekMercerTermScoreFunction( collectionFrequency, collectionLambda, documentLambda );
   } else if( method == "two" || method == "two-stage" || method == "twostage" ) {
     // twostage -- takes parameters mu and lambda
+    cerr<< "Use two stage!" <<endl;
+
     double mu = spec.get( "mu", 2500 );
     double lambda = spec.get( "lambda", 0.4 );
     
     return new indri::query::TwoStageTermScoreFunction( mu, lambda, collectionFrequency );
   } else if ( method == "tfidf" ) {
+    cerr<< "Use tfidf!" <<endl;
+
     double k1 = spec.get( "k1", 1.2 );
     double b = spec.get( "b", 0.75 );
     int qtf = spec.get("qtf", 1);
@@ -93,6 +100,8 @@ indri::query::TermScoreFunction* indri::query::TermScoreFunctionFactory::get( co
       return new indri::query::TFIDFTermScoreFunction( idf, avgDocLength, qtf, k1, b, false );
     }
   } else if ( method == "okapi" ) {
+    cerr<< "Use okapi!" <<endl;
+
     double k1 = spec.get( "k1", 1.2 );
     double b = spec.get( "b", 0.75 );
     double k3 = spec.get( "k3", 7 );
@@ -106,6 +115,8 @@ indri::query::TermScoreFunction* indri::query::TermScoreFunctionFactory::get( co
       return new indri::query::TFIDFTermScoreFunction( idf, avgDocLength, qtf, k1, b, true, k3 );
     }
   } else if (method == "f2exp") {
+    cerr<< "Use f2exp!" <<endl;
+
     double s = spec.get( "s", 0.5 );
     double k = spec.get( "k", 0.35 );
     double idf = pow( (documentCount + 1.0) / ( documentOccurrences + 0.0001 ), k );
@@ -114,17 +125,22 @@ indri::query::TermScoreFunction* indri::query::TermScoreFunctionFactory::get( co
     //cout << "idf:" << idf << " avgDoc:" << avgDocLength << " s:" << s << endl;
     return new indri::query::F2EXPTermScoreFunction( idf, avgDocLength, s );
   } else if ( method == "pivoted" ) {
+    cerr<< "Use pivoted!" <<endl;
+
       double s = spec.get( "s", 0.2 );
       double idf = log( (documentCount+1.0) / (documentOccurrences) );
       double avgDocLength = contextSize / double(documentCount);
   
       return new indri::query::PivotedTermScoreFunction( s, idf, avgDocLength );
   } else if( method == "jm-smoothing") {
-
+    cerr<< "Use pivoted!" <<endl;
+    double lambda = spec.get( "lambda", 0.4 );
     return new indri::query::JMSmoothingTermScoreFunction( collectionFrequency, lambda );
   }
 
   // if nothing else worked, we'll use dirichlet with mu=2500
+    cerr<< "Use default!" <<endl;
+
   return new indri::query::DirichletTermScoreFunction( 2500, collectionFrequency );
 }
 
