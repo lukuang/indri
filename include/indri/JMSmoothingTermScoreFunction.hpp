@@ -55,7 +55,7 @@ namespace indri
 
         _lambda = s;
 
-        _termWeight = 1.0;
+        
         _precomputeConstants();
       }
 
