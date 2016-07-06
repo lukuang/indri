@@ -21,10 +21,12 @@
 #include "indri/JelinekMercerTermScoreFunction.hpp"
 #include "indri/DirichletTermScoreFunction.hpp"
 #include "indri/TwoStageTermScoreFunction.hpp"
+
 #include "indri/Parameters.hpp"
 
 #include "indri/F2EXPTermScoreFunction.hpp"
 #include "indri/PivotedTermScoreFunction.hpp"
+#include "indri/JMSmoothingTermScoreFunction.hpp"
  
 static void termscorefunctionfactory_parse( indri::api::Parameters& converted, const std::string& spec );
 
@@ -116,6 +118,9 @@ indri::query::TermScoreFunction* indri::query::TermScoreFunctionFactory::get( co
       double avgDocLength = contextSize / double(documentCount);
   
       return new indri::query::PivotedTermScoreFunction( s, idf, avgDocLength );
+  } else if( method == "jm-smoothing") {
+
+    return new indri::query::JMSmoothingTermScoreFunction( collectionFrequency, lambda );
   }
 
   // if nothing else worked, we'll use dirichlet with mu=2500
