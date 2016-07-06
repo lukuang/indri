@@ -51,7 +51,7 @@ namespace indri
     public:
       JMSmoothingTermScoreFunction( double collectionFrequency,  double lambda ) {
         _collectionFrequency = collectionFrequency;
-        _documentFrequency = documentFrequency;
+        
 
         _lambda = lambda;
 
