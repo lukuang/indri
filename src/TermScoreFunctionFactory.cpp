@@ -133,7 +133,7 @@ indri::query::TermScoreFunction* indri::query::TermScoreFunctionFactory::get( co
   
       return new indri::query::PivotedTermScoreFunction( s, idf, avgDocLength );
   } else if( method == "jm-smoothing") {
-    cerr<< "Use pivoted!" <<endl;
+    cerr<< "Use jm-smoothing!" <<endl;
     double lambda = spec.get( "lambda", 0.4 );
     return new indri::query::JMSmoothingTermScoreFunction( collectionFrequency, lambda );
   }
