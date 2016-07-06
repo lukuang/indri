@@ -41,6 +41,8 @@ def main():
 
     os.chdir(args.indri_home)
     os.system("make")
+    ##TODO add return status check for system call and
+    ##report compiling errors!
     os.system("make install")
 
 if __name__=="__main__":
