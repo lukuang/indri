@@ -53,7 +53,7 @@ namespace indri
         _collectionFrequency = collectionFrequency;
         _documentFrequency = documentFrequency;
 
-        _lambda = s;
+        _lambda = lambda;
 
         
         _precomputeConstants();
