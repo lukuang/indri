@@ -156,6 +156,9 @@ std::string indri::query::QueryExpander::buildQuery( const std::string& original
   }
 
   ret << " ) ) ";
+  if (found!=std::string::npos){
+    ret << " ) ";
+  }
   // If no terms were added to the query, return the original
   // rather than a malformed
   //# expanded: #weight( 0.50000000000000000000000000000000 #combine(
