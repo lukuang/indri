@@ -110,7 +110,7 @@ std::string indri::query::QueryExpander::buildQuery( const std::string& original
   std::size_t found = originalQuery.find("#filr");
   if (found!=std::string::npos){
       std::size_t boundary = originalQuery.find_first_of(")");
-      int first_length = boundary;
+      int first_length = boundary+1;
       if (boundary!=std::string::npos){
           std::string first_part = originalQuery.substr(0,first_length);
           std::size_t end = originalQuery.find_last_of(")");
@@ -135,7 +135,7 @@ std::string indri::query::QueryExpander::buildQuery( const std::string& original
         << (1.0 - originalWeight)
         << " #weight( ";
   }
-  
+
   // extract top fbTerms and construct a new query
   std::vector< std::pair<std::string, double> >::const_iterator iter;
   int num_added = 0;
