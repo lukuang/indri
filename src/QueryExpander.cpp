@@ -126,15 +126,16 @@ std::string indri::query::QueryExpander::buildQuery( const std::string& original
                 
       } 
   }
-
-  ret << "#weight( " 
-      << originalWeight
-      << " #combine( "
-      << originalQuery
-      << " ) "
-      << (1.0 - originalWeight)
-      << " #weight( ";
-
+  else{
+    ret << "#weight( " 
+        << originalWeight
+        << " #combine( "
+        << originalQuery
+        << " ) "
+        << (1.0 - originalWeight)
+        << " #weight( ";
+  }
+  
   // extract top fbTerms and construct a new query
   std::vector< std::pair<std::string, double> >::const_iterator iter;
   int num_added = 0;
