@@ -135,6 +135,7 @@ indri::query::TermScoreFunction* indri::query::TermScoreFunctionFactory::get( co
   } else if( method == "jm-smoothing") {
     //cerr<< "Use jm-smoothing!" <<endl;
     double lambda = spec.get( "lambda", 0.4 );
+    cerr<< "Use jm-smoothing with lambda "<<lambda<<" !" <<endl;
     return new indri::query::JMSmoothingTermScoreFunction( collectionFrequency, lambda );
   }
 
